@@ -21,13 +21,13 @@ To run this project locally, follow these steps:
 1. **Clone the repository:**
 
     ```bash
-    git clone https://github.com/your-username/ScreenFlow.git
+    git clone https://github.com/your-username/PixelCorder.git
     ```
 
 2. **Open the project folder:**
 
     ```bash
-    cd ScreenFlow
+    cd PixelCorder
     ```
 
 3. **Open the `index.html` file in your preferred web browser.**
