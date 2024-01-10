@@ -5,7 +5,7 @@
       align-items: center;
       justify-content: center;
       height: 100vh;
-      background: url('https://i.pinimg.com/736x/c2/1a/c5/c21ac5785da58d10fbd37b467f5b2c85.jpg') center/cover no-repeat fixed;
+      background: url('images/background.jpg') center/cover no-repeat fixed;
       overflow: hidden;
       position: relative;
     }
