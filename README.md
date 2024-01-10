@@ -14,6 +14,8 @@ ScreenFlow is a web application that allows users to capture and download screen
 
 Check out the [live demo](https://qzxtu.github.io/ScreenFlow/) to see ScreenFlow in action.
 
+![image](https://github.com/qzxtu/ScreenFlow/assets/69091361/8f50bdc8-92f2-470f-bf9d-ca37737e5948)
+
 ## Getting Started
 
 To run this project locally, follow these steps:
