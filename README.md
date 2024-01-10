@@ -59,10 +59,6 @@ Contributions are welcome! Please follow these steps:
 
 This project is licensed under the Apache 2.0 License - see the [LICENSE.md](LICENSE.md) file for details.
 
-## Acknowledgments
-
-- Thanks to [qzxtu](https://github.com/qzxtu) for the initial project template.
-
 ## Author
 
 - **Qzxtu**
