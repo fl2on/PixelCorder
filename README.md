@@ -1,6 +1,6 @@
-# PixiCorder
+# Pixicorder
 
-PixiCorder is a web application that allows users to capture and download screen recordings with ease. The project provides a user-friendly interface to configure recording settings, such as resolution, format, and frames per second (FPS).
+Pixicorder is a web application that allows users to capture and download screen recordings with ease. The project provides a user-friendly interface to configure recording settings, such as resolution, format, and frames per second (FPS).
 
 [ScreenFlow Demo](https://github.com/qzxtu/ScreenFlow/assets/69091361/f75c9c8f-48f8-4e0f-96f6-b60443f52757)
 
