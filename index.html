@@ -1,275 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  
-  <title>ScreenFlow</title>
-  
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Capture and download your screen recording with ease.">
-
-  <!-- Open Graph (OG) meta tags -->
-  <meta property="og:title" content="ScreenFlow">
-  <meta property="og:description" content="Capture and download your screen recording with ease.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://cdn.discordapp.com/attachments/778085561508298754/1194514846528585850/1704864920114140746.jpeg?ex=65b0a1a4&is=659e2ca4&hm=e3b8f4d1513288edbed1ea22d4dd74a084ef3142d033aff02f90458734c0a259&">
-  <meta property="og:image" content="https://cdn.discordapp.com/attachments/778085561508298754/1194514846528585850/1704864920114140746.jpeg?ex=65b0a1a4&is=659e2ca4&hm=e3b8f4d1513288edbed1ea22d4dd74a084ef3142d033aff02f90458734c0a259&">
-
-  <!-- Twitter meta tags -->
-  <meta property="twitter:card" content="https://cdn.discordapp.com/attachments/778085561508298754/1194514846528585850/1704864920114140746.jpeg?ex=65b0a1a4&is=659e2ca4&hm=e3b8f4d1513288edbed1ea22d4dd74a084ef3142d033aff02f90458734c0a259&">
-  <meta property="twitter:title" content="ScreenFlow">
-  <meta property="twitter:description" content="Capture and download your screen recording with ease.">
-  <meta property="twitter:image" content="https://cdn.discordapp.com/attachments/778085561508298754/1194514846528585850/1704864920114140746.jpeg?ex=65b0a1a4&is=659e2ca4&hm=e3b8f4d1513288edbed1ea22d4dd74a084ef3142d033aff02f90458734c0a259&">
-
-  <!-- Favicon -->
-  <link rel="shortcut icon" href="https://cdn.discordapp.com/attachments/778085561508298754/1194515648802476042/1704865111114332135.png?ex=65b0a263&is=659e2d63&hm=dc542a2fd5e00053bfed4df8741f7240e6e4a2e52e6393326462dc2f9738792e&" type="image/x-icon">
-
-  <!-- Additional meta tags for SEO -->
-  <meta name="robots" content="index, follow">
-  <meta name="keywords" content="screen recording, capture, download, video">
-  <meta name="author" content="qzxtu">
-
- <!-- Styles -->
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      background: url('https://i.pinimg.com/736x/c2/1a/c5/c21ac5785da58d10fbd37b467f5b2c85.jpg') center/cover no-repeat fixed;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(5px);
-    }
-
-    .container {
-      z-index: 1;
-      max-width: 600px;
-      width: 100%;
-      text-align: center;
-      padding: 30px;
-      background-color: rgba(0, 0, 0, 0.6);
-      box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-      color: #ffffff;
-    }
-
-    h1 {
-      font-size: 2rem;
-      font-weight: bold;
-      color: #f9fafb;
-      margin-bottom: 20px;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-    }
-
-    label {
-      display: block;
-      font-size: 1rem;
-      font-weight: bold;
-      color: #ffffff;
-      margin-bottom: 8px;
-    }
-
-    select,
-    button {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 5px;
-      margin-top: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
-    }
-
-    select {
-      background-color: rgba(0, 0, 0, 0.8);
-      color: #ffffff;
-    }
-
-    select:focus,
-    button:focus {
-      outline: none;
-    }
-
-    button {
-      background-color: rgba(0, 0, 0, 0.6);
-      color: #ffffff;
-    }
-
-    button:hover {
-      background-color: #1a1a1a;
-    }
-
-    video {
-      width: 100%;
-      border-radius: 5px;
-      margin-top: 20px;
-      max-width: 100%; /* Añadido para evitar la deformación */
-      height: auto; /* Añadido para evitar la deformación */
-    }
-  </style>
-</head>
-
-<body>
-  <div class="overlay"></div>
-  <div class="container">
-    <h1>ScreenFlow</h1>
-
-    <div class="form-group">
-      <label for="resolution">Select Resolution:</label>
-      <select id="resolution">
-		<option value="1920x1080">1080p</option>
-		<option value="1280x720">720p</option>
-		<option value="854x480">480p</option>
-		<option value="640x480">VGA (640x480)</option>
-		<option value="1920x1200">WUXGA (1920x1200)</option>
-		<option value="2560x1440">2K (2560x1440)</option>
-		<option value="3840x2160">4K UHD (3840x2160)</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label for="format">Select Format:</label>
-      <select id="format">
-		<option value="video/webm;codecs=vp8,opus">WebM</option>
-		<option value="video/mp4;codecs=h264,aac">MP4</option>
-		<option value="video/ogg;codecs=theora,vorbis">Ogg</option>
-		<option value="video/mkv;codecs=h264,aac">MKV</option>
-		<option value="video/avi;codecs=msmpeg4v2">AVI</option>
-		<option value="video/flv;codecs=h264,aac">FLV</option>
-		<option value="video/mov;codecs=h264,aac">MOV</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label for="quality">Select FPS:</label>
-      <select id="quality">
-        <option value="30">30 FPS</option>
-        <option value="60">60 FPS</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <button id="startButton">Start Recording</button>
-      <button id="pauseButton" disabled>Pause</button>
-      <button id="stopButton" disabled>Stop</button>
-      <button id="downloadButton" disabled>Download</button>
-    </div>
-
-    <video id="recordedVideo" controls></video>
-  </div>
-  <script>
-    const $startButton = document.getElementById('startButton');
-    const $pauseButton = document.getElementById('pauseButton');
-    const $stopButton = document.getElementById('stopButton');
-    const $downloadButton = document.getElementById('downloadButton');
-    const $resolutionSelect = document.getElementById('resolution');
-    const $formatSelect = document.getElementById('format');
-    const $qualitySelect = document.getElementById('quality');
-    const $recordedVideo = document.getElementById('recordedVideo');
-
-    let mediaRecorder;
-    let recordedChunks = [];
-
-    $startButton.addEventListener('click', startRecording);
-    $pauseButton.addEventListener('click', pauseRecording);
-    $stopButton.addEventListener('click', stopRecording);
-    $downloadButton.addEventListener('click', downloadVideo);
-
-async function startRecording() {
-  try {
-    const resolution = $resolutionSelect.value.split('x');
-    const media = await navigator.mediaDevices.getDisplayMedia({
-      video: {
-        width: { ideal: resolution[0] },
-        height: { ideal: resolution[1] },
-        frameRate: { ideal: parseInt($qualitySelect.value, 10) }
-      },
-      audio: { echoCancellation: true }
-    });
-
-    mediaRecorder = new MediaRecorder(media, { mimeType: $formatSelect.value });
-    recordedChunks = [];
-
-    mediaRecorder.ondataavailable = handleDataAvailable;
-    mediaRecorder.onstop = handleStop;
-
-    const [videoTrack] = media.getVideoTracks();
-    videoTrack.addEventListener("ended", () => handleRecordingEnd(mediaRecorder));
-
-    $pauseButton.disabled = false;
-    $stopButton.disabled = false;
-    $downloadButton.disabled = true;
-
-    mediaRecorder.start();
-  } catch (error) {
-    console.error('Error obtaining screen:', error);
-  }
-}
-
-    function pauseRecording() {
-      if (mediaRecorder.state === 'recording') {
-        mediaRecorder.pause();
-        $pauseButton.textContent = 'Resume';
-      } else if (mediaRecorder.state === 'paused') {
-        mediaRecorder.resume();
-        $pauseButton.textContent = 'Pause';
-      }
-    }
-
-    function stopRecording() {
-      if (mediaRecorder && mediaRecorder.state !== 'inactive') {
-        mediaRecorder.stop();
-      }
-    }
-
-    function handleRecordingEnd() {
-      $pauseButton.disabled = true;
-      $stopButton.disabled = true;
-      $downloadButton.disabled = false;
-    }
-
-    function handleDataAvailable(event) {
-      if (event.data.size > 0) {
-        recordedChunks.push(event.data);
-      }
-    }
-
-    function handleStop() {
-      const blob = new Blob(recordedChunks, { type: $formatSelect.value });
-      $recordedVideo.src = URL.createObjectURL(blob);
-      $recordedVideo.controls = true;
-    }
-
-function downloadVideo() {
-  const blob = new Blob(recordedChunks, { type: $formatSelect.value });
-  const fileType = $formatSelect.value.split(';')[0].split('/')[1];
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  
-  a.href = url;
-  a.download = `screen_recording.${fileType}`;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-}
-  </script>
-</body>
+   <head>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+      <title>ScreenFlow</title>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="Capture and download your screen recording with ease.">
+      <!-- Open Graph (OG) meta tags -->
+      <meta property="og:title" content="ScreenFlow">
+      <meta property="og:description" content="Capture and download your screen recording with ease. Copyright © 2024 qzxtu">
+      <meta property="og:type" content="website">
+      <meta property="og:url" content="https://qzxtu.github.io/ScreenFlow/">
+      <meta property="og:image" content="images/icon.png">
+      <!-- Twitter meta tags -->
+      <meta property="twitter:card" content="images/card.jpeg">
+      <meta property="twitter:title" content="ScreenFlow">
+      <meta property="twitter:description" content="Capture and download your screen recording with ease.">
+      <meta property="twitter:image" content="images/card.jpeg">
+      <!-- Favicon -->
+      <link rel="shortcut icon" href="images/icon.png" type="image/x-icon">
+      <!-- Additional meta tags for SEO -->
+      <meta name="robots" content="index, follow">
+      <meta name="keywords" content="screen recording, capture, download, video">
+      <meta name="author" content="qzxtu">
+      <!-- Styles -->
+      <link rel="stylesheet" href="css/style.css">
+   </head>
+   <body>
+      <div class="overlay"></div>
+      <div class="container">
+         <h1>ScreenFlow</h1>
+         <div class="form-group">
+            <label for="resolution">Select Resolution:</label>
+            <select id="resolution">
+               <option value="1920x1080">1080p</option>
+               <option value="1280x720">720p</option>
+               <option value="854x480">480p</option>
+               <option value="640x480">VGA (640x480)</option>
+               <option value="1920x1200">WUXGA (1920x1200)</option>
+               <option value="2560x1440">2K (2560x1440)</option>
+               <option value="3840x2160">4K UHD (3840x2160)</option>
+            </select>
+         </div>
+         <div class="form-group">
+            <label for="format">Select Format:</label>
+            <select id="format">
+               <option value="video/webm;codecs=vp8,opus">WebM</option>
+               <option value="video/mp4;codecs=h264,aac">MP4</option>
+               <option value="video/ogg;codecs=theora,vorbis">Ogg</option>
+               <option value="video/mkv;codecs=h264,aac">MKV</option>
+               <option value="video/avi;codecs=msmpeg4v2">AVI</option>
+               <option value="video/flv;codecs=h264,aac">FLV</option>
+               <option value="video/mov;codecs=h264,aac">MOV</option>
+            </select>
+         </div>
+         <div class="form-group">
+            <label for="quality">Select FPS:</label>
+            <select id="quality">
+               <option value="30">30 FPS</option>
+               <option value="60">60 FPS</option>
+            </select>
+         </div>
+         <div class="form-group">
+            <button id="startButton">Start Recording</button>
+            <button id="pauseButton" disabled>Pause</button>
+            <button id="stopButton" disabled>Stop</button>
+            <button id="downloadButton" disabled>Download</button>
+         </div>
+         <video id="recordedVideo" controls></video>
+      </div>
+	  
+	  <!-- Main JS -->
+      <script src="js/main.js"></script>
+	  
+	  <!-- Script -->
+	  <script>
+		document.addEventListener('DOMContentLoaded', function () {
+		const currentYear = new Date().getFullYear();
+		document.title = `ScreenFlow | Copyright © ${currentYear} Qzxtu`;
+	  });
+	 </script>
+   </body>
 </html>
