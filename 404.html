@@ -47,8 +47,18 @@
             padding: 2em;
         }
 
-        h1, p {
-            transition: font-size 0.5s;
+        @media (max-width: 768px) {
+            .content {
+                padding: 1em;
+            }
+
+            h1 {
+                text-4xl;
+            }
+
+            p {
+                text-lg;
+            }
         }
 
         a {
@@ -65,17 +75,14 @@
 <body class="bg-gray-900 text-white h-screen flex items-center justify-center">
     <div class="background-container w-full h-full absolute inset-0"></div>
     <div class="content relative z-10">
-        <h1 id="pageTitle" class="text-4xl font-bold mb-4">Sorry</h1>
-        <p id="pageDescription" class="text-lg mb-8">This page is only compatible with desktop devices. Please visit our page from a desktop device.</p>
+        <h1 id="pageTitle" class="text-6xl font-bold mb-4">Sorry</h1>
+        <p id="pageDescription" class="text-2xl mb-8">This page is only compatible with desktop devices. Please visit our page from a desktop device.</p>
     </div>
     <!-- Script -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const currentYear = new Date().getFullYear();
             document.title = `PixelCorder | Copyright © ${currentYear} Qzxtu`;
-            const scaleFactor = window.innerWidth / 1920;
-            document.getElementById('pageTitle').style.fontSize = `${4 * scaleFactor}em`;
-            document.getElementById('pageDescription').style.fontSize = `${1.5 * scaleFactor}em`;
         });
     </script>
 </body>
