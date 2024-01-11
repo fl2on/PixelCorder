@@ -44,7 +44,7 @@
             text-align: center;
             z-index: 1;
             position: relative;
-            padding: 2em; /* Ajusta según sea necesario */
+            padding: 2em;
         }
 
         h1, p {
@@ -73,9 +73,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             const currentYear = new Date().getFullYear();
             document.title = `PixelCorder | Copyright © ${currentYear} Qzxtu`;
-
-            // Ajustar dinámicamente el tamaño del texto
-            const scaleFactor = window.innerWidth / 1920; // 1920 es el ancho deseado sin zoom
+            const scaleFactor = window.innerWidth / 1920;
             document.getElementById('pageTitle').style.fontSize = `${4 * scaleFactor}em`;
             document.getElementById('pageDescription').style.fontSize = `${1.5 * scaleFactor}em`;
         });
