@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Capture and download your screen recording with ease.">
+    <!-- Open Graph (OG) meta tags -->
+    <meta property="og:title" content="PixelCorder">
+    <meta property="og:description" content="Capture and download your screen recording with ease. Copyright © 2024 qzxtu">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://qzxtu.github.io/PixelCorder/">
+    <meta property="og:image" content="images/icon.png">
+    <!-- Twitter meta tags -->
+    <meta property="twitter:card" content="https://qzxtu.github.io/PixelCorder/images/card.jpeg">
+    <meta property="twitter:title" content="PixelCorder">
+    <meta property="twitter:description" content="Capture and download your screen recording with ease.">
+    <meta property="twitter:image" content="https://qzxtu.github.io/PixelCorder/images/card.jpeg">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="images/icon.png" type="image/x-icon">
+    <!-- Include Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            overflow: hidden;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .background-container {
+            background-image: url('https://cdn.discordapp.com/attachments/689717323543609386/1194859282169090130/170494703131270818.png?ex=65b1e26c&is=659f6d6c&hm=adc907355c518128c1747a8cbc925a5859114ff71c4b1cd4aaeddd6272dcd811');
+            background-size: cover;
+            background-position: center;
+            filter: blur(15px);
+            transition: transform 0.5s;
+        }
+
+        .background-container:hover {
+            transform: scale(1.1);
+        }
+
+        .content {
+            text-align: center;
+            z-index: 1;
+            position: relative;
+            padding: 2em; /* Ajusta según sea necesario */
+        }
+
+        h1, p {
+            transition: font-size 0.5s;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white h-screen flex items-center justify-center">
+    <div class="background-container w-full h-full absolute inset-0"></div>
+    <div class="content relative z-10">
+        <h1 id="pageTitle" class="text-4xl font-bold mb-4">Sorry</h1>
+        <p id="pageDescription" class="text-lg mb-8">This page is only compatible with desktop devices. Please visit our page from a desktop device.</p>
+    </div>
+    <!-- Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const currentYear = new Date().getFullYear();
+            document.title = `PixelCorder | Copyright © ${currentYear} Qzxtu`;
+
+            // Ajustar dinámicamente el tamaño del texto
+            const scaleFactor = window.innerWidth / 1920; // 1920 es el ancho deseado sin zoom
+            document.getElementById('pageTitle').style.fontSize = `${4 * scaleFactor}em`;
+            document.getElementById('pageDescription').style.fontSize = `${1.5 * scaleFactor}em`;
+        });
+    </script>
+</body>
+</html>

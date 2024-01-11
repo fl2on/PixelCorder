@@ -75,12 +75,18 @@
       </div>
       <!-- Main JS -->
       <script src="js/main.js"></script>
-	  <!-- Script -->
-	  <script>
-		document.addEventListener('DOMContentLoaded', function () {
-		const currentYear = new Date().getFullYear();
-		document.title = `PixelCorder | Copyright © ${currentYear} Qzxtu`;
-	  });
-	 </script>
+      <!-- Script -->
+      <script>
+         document.addEventListener('DOMContentLoaded', function () {
+         const currentYear = new Date().getFullYear();
+         document.title = `PixelCorder | Copyright © ${currentYear} Qzxtu`;
+          });
+      </script>
+      <script>
+         var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+         if (isMobile) {
+             window.location.href = "404.html";
+         }
+      </script>
    </body>
 </html>
