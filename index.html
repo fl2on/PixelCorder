@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
    <head>
+      <title>PixelCorder</title>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
@@ -11,7 +12,7 @@
       <meta name="description" content="Capture and download your screen recording with ease.">
       <!-- Open Graph (OG) meta tags -->
       <meta property="og:title" content="PixelCorder">
-      <meta property="og:description" content="Capture and download your screen recording with ease. Copyright © 2024 qzxtu">
+      <meta property="og:description" content="Capture and download your screen recording with ease.">
       <meta property="og:type" content="website">
       <meta property="og:url" content="https://qzxtu.github.io/PixelCorder/">
       <meta property="og:image" content="images/icon.png">
@@ -71,7 +72,12 @@
             <button id="stopButton" disabled>Stop</button>
             <button id="downloadButton" disabled>Download</button>
          </div>
+		 <div class="video-container">
          <video id="recordedVideo" controls></video>
+		 </div>
+		 <div id="notification" class="notification hidden">
+            <p id="notificationText"></p>
+         </div>
       </div>
       <!-- Main JS -->
       <script src="js/main.js"></script>
