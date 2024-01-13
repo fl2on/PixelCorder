@@ -86,10 +86,10 @@ function pauseRecording() {
 }
 
 function stopRecording() {
+    $notification.classList.add('hidden');
     if (mediaRecorder && mediaRecorder.state !== 'inactive') {
         mediaRecorder.stop();
         handleRecordingStop();
-        $notification.classList.add('hidden');
     }
 }
 
