@@ -35,7 +35,7 @@ async function startRecording() {
                 }
             },
             audio: {
-                echoCancellation: true
+                echoCancellation: false
             }
         });
 
