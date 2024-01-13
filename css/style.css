@@ -23,11 +23,11 @@ body {
 
 .container {
     z-index: 1;
-    max-width: 320px;
+    max-width: 365px;
     min-height: 250px;
     width: 100%;
     text-align: center;
-    padding: 20px;
+    padding: 25px;
     background-color: rgba(0, 0, 0, 0.6);
     box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
     border-radius: 10px;
