@@ -11,7 +11,6 @@ const $notificationText = document.getElementById('notificationText');
 
 let mediaRecorder;
 let recordedChunks = [];
-let isRecording = false;
 
 $startButton.addEventListener('click', startRecording);
 $pauseButton.addEventListener('click', pauseRecording);
@@ -66,8 +65,6 @@ async function startRecording() {
             }
             isFirstTime = false;
         }
-        
-        isRecording = true;
     } catch (error) {
         console.error('Error obtaining screen:', error);
     }
