@@ -13,7 +13,7 @@ PixelCorder is a web application that allows users to capture and download scree
 
 ## Demo
 
-Check out the [live demo](https://qzxtu.github.io/PixelCorder/) to see ScreenFlow in action.
+Check out the [live demo](https://qzxtu.github.io/PixelCorder/) to see PixelCorder in action.
 
 ![image](https://github.com/qzxtu/PixelCorder/assets/69091361/6ad1cbbe-b863-4f91-a952-4ea107debd38)
 
