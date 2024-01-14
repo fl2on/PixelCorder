@@ -1,8 +1,9 @@
 # PixelCorder
 
-PixelCorder is a web application that allows users to capture and download screen recordings with ease. The project provides a user-friendly interface to configure recording settings, such as resolution, format, and frames per second (FPS).
+![image](https://github.com/qzxtu/PixelCorder/assets/69091361/e6e10e33-4c17-41fe-8d10-e2414b208362)
+---
 
-![ScreenFlow Demo](https://github.com/qzxtu/PixelCorder/assets/69091361/188a6d27-89a7-404b-b29f-9635817f691b)
+PixelCorder is a web application that allows users to capture and download screen recordings with ease. The project provides a user-friendly interface to configure recording settings, such as resolution, format, and frames per second (FPS).
 
 ## Features
 
@@ -13,6 +14,8 @@ PixelCorder is a web application that allows users to capture and download scree
 ## Demo
 
 Check out the [live demo](https://qzxtu.github.io/PixelCorder/) to see ScreenFlow in action.
+
+![image](https://github.com/qzxtu/PixelCorder/assets/69091361/6ad1cbbe-b863-4f91-a952-4ea107debd38)
 
 ## Getting Started
 
