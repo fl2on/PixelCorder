@@ -1,4 +1,4 @@
-# PixelCorder
+# PixelCorder 🌙
 
 ![image](https://github.com/qzxtu/PixelCorder/assets/69091361/e6e10e33-4c17-41fe-8d10-e2414b208362)
 ---
