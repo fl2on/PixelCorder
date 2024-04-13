@@ -50,13 +50,6 @@
          <div class="form-group">
             <label for="format">Select Format:</label>
             <select id="format">
-               <option value="video/webm;codecs=vp8,opus">WebM</option>
-               <option value="video/mp4;codecs=h264,aac">MP4</option>
-               <option value="video/ogg;codecs=theora,vorbis">Ogg</option>
-               <option value="video/mkv;codecs=h264,aac">MKV</option>
-               <option value="video/avi;codecs=msmpeg4v2">AVI</option>
-               <option value="video/flv;codecs=h264,aac">FLV</option>
-               <option value="video/mov;codecs=h264,aac">MOV</option>
             </select>
          </div>
          <div class="form-group">
@@ -93,6 +86,23 @@
          if (isMobile) {
              window.location.href = "404.html";
          }
+      </script>
+      <script>
+         window.onload = function() {
+            let formatosSoportados = ['video/webm;codecs=vp8,opus', 'video/mp4;codecs=h264,aac', 'video/ogg;codecs=theora,vorbis', 'video/mkv;codecs=h264,aac', 'video/avi;codecs=msmpeg4v2', 'video/flv;codecs=h264,aac', 'video/mov;codecs=h264,aac'];
+            let formatSelect = document.getElementById('format');
+            
+            formatSelect.innerHTML = '';
+
+            formatosSoportados.forEach(function(formato) {
+               if (MediaRecorder.isTypeSupported(formato)) {
+                  let option = document.createElement('option');
+                  option.value = formato;
+                  option.text = formato.split(';')[0].toUpperCase();
+                  formatSelect.appendChild(option);
+               }
+            });
+         };
       </script>
    </body>
 </html>
