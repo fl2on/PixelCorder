@@ -1,108 +1,480 @@
 <!DOCTYPE html>
-<html lang="en">
-   <head>
-      <title>PixelCorder</title>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-      <!-- Meta -->
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="description" content="Capture and download your screen recording with ease.">
-      <!-- Open Graph (OG) meta tags -->
-      <meta property="og:title" content="PixelCorder">
-      <meta property="og:description" content="Capture and download your screen recording with ease.">
-      <meta property="og:type" content="website">
-      <meta property="og:url" content="https://fl2on.github.io/PixelCorder/">
-      <meta property="og:image" content="images/icon.png">
-      <!-- Twitter meta tags -->
-      <meta property="twitter:card" content="https://fl2on.github.io/PixelCorder/images/card.jpeg">
-      <meta property="twitter:title" content="PixelCorder">
-      <meta property="twitter:description" content="Capture and download your screen recording with ease.">
-      <meta property="twitter:image" content="https://fl2on.github.io/PixelCorder/images/card.jpeg">
-      <!-- Favicon -->
-      <link rel="shortcut icon" href="images/icon.png" type="image/x-icon">
-      <!-- Additional meta tags for SEO -->
-      <meta name="robots" content="index, follow">
-      <meta name="keywords" content="screen recording, capture, download, video">
-      <meta name="author" content="fl2on">
-      <!-- Styles -->
-      <link rel="stylesheet" href="css/style.css">
-   </head>
-   <!-- Body -->
-   <body>
-      <div class="overlay"></div>
-      <div class="container">
-         <h1>PixelCorder</h1>
-         <div class="form-group">
-            <label for="resolution">Select Resolution:</label>
-            <select id="resolution">
-               <option value="1920x1080">1080p</option>
-               <option value="1280x720">720p</option>
-               <option value="854x480">480p</option>
-               <option value="640x480">VGA (640x480)</option>
-               <option value="1920x1200">WUXGA (1920x1200)</option>
-               <option value="2560x1440">2K (2560x1440)</option>
-               <option value="3840x2160">4K UHD (3840x2160)</option>
-            </select>
-         </div>
-         <div class="form-group">
-            <label for="format">Select Format:</label>
-            <select id="format">
-            </select>
-         </div>
-         <div class="form-group">
-            <label for="quality">Select FPS:</label>
-            <select id="quality">
-               <option value="30">30 FPS</option>
-               <option value="60">60 FPS</option>
-            </select>
-         </div>
-         <div class="form-group">
-            <button id="startButton">Start Recording</button>
-            <button id="pauseButton" disabled>Pause</button>
-            <button id="stopButton" disabled>Stop</button>
-            <button id="downloadButton" disabled>Download</button>
-         </div>
-		 <div class="video-container">
-         <video id="recordedVideo" controls></video>
-		 </div>
-		 <div id="notification" class="notification hidden">
-            <p id="notificationText"></p>
-         </div>
-      </div>
-      <!-- Main JS -->
-      <script src="js/main.js"></script>
-      <!-- Script -->
-      <script>
-         document.addEventListener('DOMContentLoaded', function () {
-         const currentYear = new Date().getFullYear();
-         document.title = `PixelCorder | Copyright © ${currentYear} fl2on`;
-          });
-      </script>
-      <script>
-         var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-         if (isMobile) {
-             window.location.href = "404.html";
-         }
-      </script>
-      <script>
-         window.onload = function() {
-            let formatosSoportados = ['video/webm;codecs=vp8,opus', 'video/mp4;codecs=h264,aac', 'video/ogg;codecs=theora,vorbis', 'video/mkv;codecs=h264,aac', 'video/avi;codecs=msmpeg4v2', 'video/flv;codecs=h264,aac', 'video/mov;codecs=h264,aac'];
-            let formatSelect = document.getElementById('format');
-            
-            formatSelect.innerHTML = '';
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixelCorder - Professional Screen Recording</title>
+    
+    <!-- Meta tags -->
+    <meta name="description" content="Professional screen recording with advanced features and real-time editing">
+    <meta name="keywords" content="screen recording, capture, video, professional, editing">
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary': '#8b5cf6',
+                        'primary-dark': '#7c3aed',
+                        'dark': '#0f172a',
+                        'dark-light': '#1e293b',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-inter bg-black text-white">
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-black/90 backdrop-blur-sm border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-3">
+                    <img src="images/logo.png" alt="PixelCorder" class="w-8 h-8">
+                    <span class="text-lg font-bold">PixelCorder</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#features" class="text-gray-300 hover:text-white transition">Features</a>
+                    <a href="#app" class="text-gray-300 hover:text-white transition">App</a>
+                    <a href="#app" class="bg-primary hover:bg-primary-dark px-6 py-2 rounded-full font-medium transition text-center">
+                        Start Recording
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-            formatosSoportados.forEach(function(formato) {
-               if (MediaRecorder.isTypeSupported(formato)) {
-                  let option = document.createElement('option');
-                  option.value = formato;
-                  option.text = formato.split(';')[0].toUpperCase();
-                  formatSelect.appendChild(option);
-               }
-            });
-         };
-      </script>
-   </body>
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 px-6 text-center">
+        <div class="max-w-6xl mx-auto">
+            <div class="inline-flex items-center bg-gray-900/50 border border-gray-700 rounded-full px-4 py-2 mb-8">
+                <span class="text-sm text-green-400">●</span>
+                <span class="text-sm text-white ml-2">Professional Screen Recorder</span>
+            </div>
+
+            <h1 class="text-5xl md:text-7xl font-black mb-6">
+                Professional Screen Recording
+                <br>
+                <span class="text-transparent bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text">
+                    Made Simple
+                </span>
+            </h1>
+
+            <p class="text-xl text-gray-400 max-w-3xl mx-auto mb-12">
+                Record Your Screen Directly From Your Browser. 
+                Built With Modern Web Technologies for Seamless Recording Experience.
+            </p>
+
+            <button id="startRecordingBtn" class="bg-purple-600 hover:bg-purple-700 text-white px-10 py-4 rounded-full text-lg font-semibold transition-all transform hover:scale-105 shadow-lg shadow-purple-600/25 mb-16">
+                Start Recording for Free
+            </button>
+
+            <div class="flex items-center justify-center space-x-8 text-sm text-gray-500">
+                <div class="flex items-center space-x-2">
+                    <span class="w-2 h-2 bg-green-400 rounded-full"></span>
+                    <span>No Installation Required</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <span class="w-2 h-2 bg-blue-400 rounded-full"></span>
+                    <span>Web-Based</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <span class="w-2 h-2 bg-purple-400 rounded-full"></span>
+                    <span>Local Storage</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recording App Section -->
+    <section id="app" class="py-16 px-6 bg-gradient-to-b from-black to-gray-900">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-3 gap-8">
+                
+                <!-- Recording Controls -->
+                <div class="space-y-6">
+                    <div class="bg-gray-900/60 rounded-2xl p-6 border border-gray-800">
+                        <h3 class="text-lg font-semibold mb-4 flex items-center">
+                            <i class="fas fa-record-vinyl text-red-500 mr-2"></i>
+                            Recording Controls
+                        </h3>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-3">
+                                <button id="recordBtn" class="bg-purple-600 hover:bg-purple-700 w-16 h-16 rounded-full flex items-center justify-center transition" title="Start Recording" aria-label="Start Recording">
+                                    <i class="fas fa-video text-xl"></i>
+                                </button>
+                                <span class="text-gray-300">Record</span>
+                            </div>
+                            
+                            <div class="flex items-center space-x-3">
+                                <button id="pauseBtn" class="bg-gray-700 hover:bg-gray-600 w-12 h-12 rounded-full flex items-center justify-center transition" title="Pause Recording" aria-label="Pause Recording">
+                                    <i class="fas fa-pause"></i>
+                                </button>
+                                <span class="text-gray-400">Pause</span>
+                            </div>
+                            
+                            <div class="flex items-center space-x-3">
+                                <button id="stopBtn" class="bg-red-600 hover:bg-red-700 w-12 h-12 rounded-full flex items-center justify-center transition" title="Stop Recording" aria-label="Stop Recording">
+                                    <i class="fas fa-stop"></i>
+                                </button>
+                                <span class="text-gray-400">Stop</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Settings -->
+                    <div class="bg-gray-900/60 rounded-2xl p-6 border border-gray-800">
+                        <h3 class="text-lg font-semibold mb-4 flex items-center">
+                            <i class="fas fa-cog text-blue-500 mr-2"></i>
+                            Settings
+                        </h3>
+                        
+                        <div class="space-y-3">
+                            <div>
+                                <label for="qualitySelect" class="text-sm text-gray-400 block mb-1">Quality</label>
+                                <select id="qualitySelect" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2" title="Select Video Quality">
+                                    <option value="1080p">1080p</option>
+                                    <option value="720p">720p</option>
+                                    <option value="4K">4K</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label for="frameRateSelect" class="text-sm text-gray-400 block mb-1">Frame Rate</label>
+                                <select id="frameRateSelect" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2" title="Select Frame Rate">
+                                    <option value="30">30 FPS</option>
+                                    <option value="60">60 FPS</option>
+                                    <option value="120">120 FPS</option>
+                                </select>
+                            </div>
+                            
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-400">Audio</span>
+                                <label class="relative inline-flex items-center cursor-pointer" for="audioToggle">
+                                    <input type="checkbox" id="audioToggle" class="sr-only peer" checked title="Enable/Disable Audio">
+                                    <div class="w-11 h-6 bg-gray-700 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
+                                </label>
+                            </div>
+                            
+                            <div id="audioSourceSection" class="space-y-2">
+                                <label for="audioSourceSelect" class="text-sm text-gray-400 block">Audio Source</label>
+                                <select id="audioSourceSelect" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm" title="Select Audio Source">
+                                    <option value="system">🖥️ System Audio Only</option>
+                                    <option value="mic">🎤 Microphone Only</option>
+                                    <option value="both">🎧 System Audio + Microphone</option>
+                                    <option value="none">🔇 No Audio</option>
+                                </select>
+                                <div class="text-xs text-gray-500 flex items-center">
+                                    <i class="fas fa-info-circle mr-1"></i>
+                                    System audio requires browser permission
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-400">Microphone</span>
+                                <label class="relative inline-flex items-center cursor-pointer" for="micToggle">
+                                    <input type="checkbox" id="micToggle" class="sr-only peer" title="Enable/Disable Microphone">
+                                    <div class="w-11 h-6 bg-gray-700 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
+                                </label>
+                            </div>
+                            
+                            <!-- Audio Level Indicator -->
+                            <div id="audioLevelSection" class="space-y-2" style="display: none;">
+                                <div class="text-sm text-gray-400">Audio Level</div>
+                                <div class="bg-gray-800 rounded-full h-3 overflow-hidden">
+                                    <div id="audioLevelBar" class="h-full bg-gradient-to-r from-green-500 to-red-500 transition-all duration-100" style="width: 0%"></div>
+                                </div>
+                                <div class="text-xs text-gray-500 text-center">Speak or play audio to test</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="bg-gray-900/60 rounded-2xl p-6 border border-gray-800">
+                        <h3 class="text-lg font-semibold mb-4 flex items-center">
+                            <i class="fas fa-bolt text-yellow-500 mr-2"></i>
+                            Quick Actions
+                        </h3>
+                        
+                        <div class="grid grid-cols-3 gap-3">
+                            <button id="screenshotBtn" class="bg-gray-800 hover:bg-gray-700 p-3 rounded-lg text-center transition">
+                                <i class="fas fa-camera block mb-1"></i>
+                                <span class="text-xs">Screenshot</span>
+                            </button>
+                            
+                            <button id="editBtn" class="bg-gray-800 hover:bg-gray-700 p-3 rounded-lg text-center transition">
+                                <i class="fas fa-edit block mb-1"></i>
+                                <span class="text-xs">Edit</span>
+                            </button>
+                            
+                            <button id="fullscreenBtn" class="bg-gray-800 hover:bg-gray-700 p-3 rounded-lg text-center transition">
+                                <i class="fas fa-expand block mb-1"></i>
+                                <span class="text-xs">Fullscreen</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video Preview -->
+                <div class="lg:col-span-2">
+                    <div class="bg-gray-900/60 rounded-2xl p-6 border border-gray-800 h-full">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold flex items-center">
+                                <i class="fas fa-play text-green-500 mr-2"></i>
+                                Video Preview
+                            </h3>
+                            <button id="previewFullscreenBtn" class="text-gray-400 hover:text-white transition" title="Fullscreen Preview">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                        
+                        <!-- Video Preview Area -->
+                        <div class="bg-gray-800 rounded-xl aspect-video flex items-center justify-center">
+                            <div id="previewArea" class="text-center">
+                                <i class="fas fa-video text-6xl text-gray-600 mb-4"></i>
+                                <p class="text-gray-500 text-lg">Ready to Record</p>
+                                <p class="text-gray-600 text-sm mt-2">Click the record button to start capturing your screen</p>
+                            </div>
+                            
+                            <video id="videoPreview" class="w-full h-full rounded-xl hidden" controls></video>
+                        </div>
+                        
+                        <!-- Recording Stats -->
+                        <div class="mt-6 grid grid-cols-4 gap-4 text-center">
+                            <div>
+                                <div class="text-2xl font-bold text-blue-400" id="fileSize">0 MB</div>
+                                <div class="text-xs text-gray-500">File Size</div>
+                            </div>
+                            <div>
+                                <div class="text-2xl font-bold text-green-400" id="duration">0</div>
+                                <div class="text-xs text-gray-500">Current FPS</div>
+                            </div>
+                            <div>
+                                <div class="text-2xl font-bold text-yellow-400" id="recordingTime">0</div>
+                                <div class="text-xs text-gray-500">Recordings</div>
+                            </div>
+                            <div>
+                                <div class="text-2xl font-bold text-purple-400" id="storage">0 GB</div>
+                                <div class="text-xs text-gray-500">Storage</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Timer -->
+                        <div class="mt-4 text-center">
+                            <div class="text-3xl font-mono text-white" id="timer">00:00:00</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent Recordings -->
+    <section class="py-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold mb-8 flex items-center">
+                <i class="fas fa-history text-purple-500 mr-3"></i>
+                Recent Recordings
+            </h2>
+            
+            <div id="recentRecordings" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Empty state -->
+                <div class="col-span-full text-center py-12">
+                    <i class="fas fa-video text-6xl text-gray-600 mb-4"></i>
+                    <p class="text-gray-400 text-lg">No recordings yet</p>
+                    <p class="text-gray-600 text-sm">Start recording to see your files here</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16 px-6 bg-gradient-to-b from-gray-900 to-black">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">
+                    Powerful Features for
+                    <span class="text-transparent bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text">
+                        Modern Recording
+                    </span>
+                </h2>
+                <p class="text-xl text-gray-400 mb-8">
+                    Everything you need to record, manage and share your screen recordings efficiently.
+                </p>
+            </div>
+
+            <!-- Real Features Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                <div class="bg-gray-900/50 rounded-2xl p-8 border border-gray-800 hover:border-purple-500 transition-all">
+                    <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-hdd text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Local Storage</h3>
+                    <p class="text-gray-400">
+                        Automatic save to your browser's local storage. All recordings stay private on your device.
+                    </p>
+                </div>
+
+                <div class="bg-gray-900/50 rounded-2xl p-8 border border-gray-800 hover:border-green-500 transition-all">
+                    <div class="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-download text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Instant Download</h3>
+                    <p class="text-gray-400">
+                        Recordings are automatically saved and can be downloaded immediately. No waiting, completely offline.
+                    </p>
+                </div>
+
+                <div class="bg-gray-900/50 rounded-2xl p-8 border border-gray-800 hover:border-blue-500 transition-all">
+                    <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-cogs text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Customizable Settings</h3>
+                    <p class="text-gray-400">
+                        Choose quality (720p-4K), frame rate (30-120fps), audio options, and more. Settings sync across devices.
+                    </p>
+                </div>
+
+                <div class="bg-gray-900/50 rounded-2xl p-8 border border-gray-800 hover:border-yellow-500 transition-all">
+                    <div class="w-12 h-12 bg-yellow-600 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-camera text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Screenshot Capture</h3>
+                    <p class="text-gray-400">
+                        Instant Screenshot Capture With One Click. Perfect for Documentation, Tutorials, and Bug Reports.
+                    </p>
+                </div>
+
+                <div class="bg-gray-900/50 rounded-2xl p-8 border border-gray-800 hover:border-red-500 transition-all">
+                    <div class="w-12 h-12 bg-red-600 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-history text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Recording History</h3>
+                    <p class="text-gray-400">
+                        Keep Track of All Your Recordings With Timestamps, File Sizes, and Easy Management Tools. Never Lose a Recording Again.
+                    </p>
+                </div>
+
+                <div class="bg-gray-900/50 rounded-2xl p-8 border border-gray-800 hover:border-indigo-500 transition-all">
+                    <div class="w-12 h-12 bg-indigo-600 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-shield-alt text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Privacy First</h3>
+                    <p class="text-gray-400">
+                        All Recordings Are Stored Locally. No Data Is Sent to External Servers. Your Privacy Is Our Priority.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Technology Stats -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                <div>
+                    <div class="text-3xl font-bold text-white mb-2">WebRTC</div>
+                    <div class="text-gray-400">Native API</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold text-white mb-2">4K</div>
+                    <div class="text-gray-400">Max Quality</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold text-white mb-2">120fps</div>
+                    <div class="text-gray-400">Max Frame Rate</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold text-white mb-2">WebM</div>
+                    <div class="text-gray-400">Efficient Format</div>
+                </div>
+            </div>
+
+            <!-- How it Works -->
+            <div class="mt-16">
+                <h3 class="text-2xl font-bold text-center mb-12">How It Works</h3>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl font-bold text-white">1</span>
+                        </div>
+                        <h4 class="text-lg font-semibold mb-2">Open App</h4>
+                        <p class="text-gray-400">Access PixelCorder Directly in Your Browser. No Downloads or Installations Required.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl font-bold text-white">2</span>
+                        </div>
+                        <h4 class="text-lg font-semibold mb-2">Start Recording</h4>
+                        <p class="text-gray-400">Click Record, Select Your Screen/Window, and Start Capturing With Custom Settings.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl font-bold text-white">3</span>
+                        </div>
+                        <h4 class="text-lg font-semibold mb-2">Download & Share</h4>
+                        <p class="text-gray-400">Your Recording Is Automatically Saved and Ready to Download or Share Instantly.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto text-center">
+            <div class="flex items-center justify-center space-x-3 mb-6">
+                <img src="images/logo.png" alt="PixelCorder" class="w-8 h-8">
+                <span class="text-xl font-bold">PixelCorder</span>
+            </div>
+            <p class="text-gray-400 mb-4">Professional Screen Recording Made Simple</p>
+            
+            <!-- GitHub Profile Link -->
+            <div class="mb-6">
+                <a href="https://github.com/fl2on" target="_blank" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 rounded-lg font-medium text-white transition-all transform hover:scale-105 hover:shadow-lg">
+                    <i class="fab fa-github mr-3 text-xl"></i>
+                    <span>View on GitHub</span>
+                    <i class="fas fa-external-link-alt ml-2 text-sm opacity-70"></i>
+                </a>
+            </div>
+            
+            <!-- Social Links -->
+            <div class="flex items-center justify-center space-x-6 mb-6">
+                <a href="https://github.com/fl2on" target="_blank" class="text-gray-400 hover:text-purple-400 transition-colors">
+                    <i class="fab fa-github text-2xl"></i>
+                </a>
+                <a href="https://github.com/fl2on" target="_blank" class="text-gray-400 hover:text-blue-400 transition-colors" title="Developer Profile">
+                    <i class="fas fa-code text-2xl"></i>
+                </a>
+                <a href="https://github.com/fl2on" target="_blank" class="text-gray-400 hover:text-green-400 transition-colors" title="Projects">
+                    <i class="fas fa-folder-open text-2xl"></i>
+                </a>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-6">
+                <p class="text-gray-600 text-sm mb-2">
+                    © 2025 PixelCorder. All rights reserved.
+                </p>
+                <p class="text-gray-500 text-xs">
+                    Developed with <i class="fas fa-heart text-red-500 mx-1"></i> by 
+                    <a href="https://github.com/fl2on" target="_blank" class="text-purple-400 hover:text-purple-300 font-medium transition-colors">@fl2on</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/video-editor.js"></script>
+    <script src="js/pixelcorder.js"></script>
+</body>
 </html>

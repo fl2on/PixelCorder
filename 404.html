@@ -1,90 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>PixelCorder</title>
-    <!-- Meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Capture and download your screen recording with ease.">
-    <!-- Open Graph (OG) meta tags -->
-    <meta property="og:title" content="PixelCorder">
-    <meta property="og:description" content="Capture and download your screen recording with ease.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://fl2on.github.io/PixelCorder/">
-    <meta property="og:image" content="images/icon.png">
-    <!-- Twitter meta tags -->
-    <meta property="twitter:card" content="https://fl2on.github.io/PixelCorder/images/card.jpeg">
-    <meta property="twitter:title" content="PixelCorder">
-    <meta property="twitter:description" content="Capture and download your screen recording with ease.">
-    <meta property="twitter:image" content="https://fl2on.github.io/PixelCorder/images/card.jpeg">
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="images/icon.png" type="image/x-icon">
-    <!-- Include Tailwind CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <style>
-        body {
-            overflow: hidden;
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        .background-container {
-            background-image: url('https://cdn.discordapp.com/attachments/689717323543609386/1194859282169090130/170494703131270818.png?ex=65b1e26c&is=659f6d6c&hm=adc907355c518128c1747a8cbc925a5859114ff71c4b1cd4aaeddd6272dcd811');
-            background-size: cover;
-            background-position: center;
-            filter: blur(15px);
-            transition: transform 0.5s;
-        }
-
-        .background-container:hover {
-            transform: scale(1.1);
-        }
-
-        .content {
-            text-align: center;
-            z-index: 1;
-            position: relative;
-            padding: 2em;
-        }
-
-        @media (max-width: 768px) {
-            .content {
-                padding: 1em;
-            }
-
-            h1 {
-                font-size: 4xl;
-            }
-
-            p {
-                font-size: large;
-            }
-        }
-
-        a {
-            color: #3498db;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
-</head>
-<body class="bg-gray-900 text-white h-screen flex items-center justify-center">
-    <div class="background-container w-full h-full absolute inset-0"></div>
-    <div class="content relative z-10">
-        <h1 id="pageTitle" class="text-6xl font-bold mb-4">Sorry</h1>
-        <p id="pageDescription" class="text-2xl mb-8">This page is only compatible with desktop devices. Please visit our page from a desktop device.</p>
-    </div>
-    <!-- Script -->
+    <title>404 - Página No Encontrada | PixelCorder</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const currentYear = new Date().getFullYear();
-            document.title = `PixelCorder | Copyright © ${currentYear} fl2on`;
-        });
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary': '#8b5cf6',
+                    }
+                }
+            }
+        }
     </script>
+</head>
+<body class="font-inter bg-black text-white min-h-screen flex items-center justify-center">
+    <div class="text-center max-w-md mx-auto px-6">
+        <div class="mb-8">
+            <h1 class="text-9xl font-bold text-transparent bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text mb-4">
+                404
+            </h1>
+            <h2 class="text-2xl font-semibold mb-4">Página No Encontrada</h2>
+            <p class="text-gray-400 mb-8">
+                La página que buscas no existe o ha sido movida.
+            </p>
+        </div>
+        
+        <div class="space-y-4">
+            <a href="index.html" class="inline-flex items-center px-6 py-3 bg-primary hover:bg-purple-700 rounded-full font-medium transition-colors">
+                ← Volver al Inicio
+            </a>
+            
+            <div class="flex items-center justify-center space-x-4 mt-8">
+                <a href="index.html" class="text-gray-400 hover:text-white transition-colors">Inicio</a>
+                <span class="text-gray-600">•</span>
+                <a href="index.html#features" class="text-gray-400 hover:text-white transition-colors">Características</a>
+                <span class="text-gray-600">•</span>
+                <a href="index.html#app" class="text-gray-400 hover:text-white transition-colors">App</a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

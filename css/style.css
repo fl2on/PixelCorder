@@ -1,123 +1,285 @@
-body {
-    font-family: 'Poppins', sans-serif;
+/* PixelCorder - Professional Screen Recording Tool CSS */
+
+/* Reset and base styles */
+* {
     margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background: url('https://fl2on.github.io/PixelCorder/images/background.jpg') center/cover no-repeat fixed;
-    overflow: hidden;
-    position: relative;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(5px);
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.6;
+    scroll-behavior: smooth;
+    background: #000;
+    color: #fff;
 }
 
-.container {
-    z-index: 1;
-    max-width: 365px;
-    min-height: 250px;
-    width: 100%;
-    text-align: center;
-    padding: 25px;
-    background-color: rgba(0, 0, 0, 0.6);
-    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    color: #ffffff;
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
 }
 
-h1 {
-    font-size: 1.4rem;
-    font-weight: bold;
-    color: #f9fafb;
-    margin-bottom: 20px;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+::-webkit-scrollbar-track {
+    background: #1e293b;
 }
 
-label {
-    display: block;
-    font-size: 0.7rem;
-    font-weight: bold;
-    color: #ffffff;
-    margin-bottom: 8px;
+::-webkit-scrollbar-thumb {
+    background: #8b5cf6;
+    border-radius: 4px;
 }
 
-select,
+::-webkit-scrollbar-thumb:hover {
+    background: #7c3aed;
+}
+
+/* Navigation */
+nav {
+    transition: all 0.3s ease;
+    backdrop-filter: blur(20px);
+}
+
+nav.scrolled {
+    background: rgba(0, 0, 0, 0.95);
+}
+
+/* Buttons */
 button {
-    width: 100%;
-    padding: 5px;
-    border: none;
-    font-size: 0.7rem;
-    border-radius: 5px;
-    margin-top: 8px;
     cursor: pointer;
-    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
-}
-
-select {
-    background-color: rgba(0, 0, 0, 0.8);
-    color: #ffffff;
-    font-size: 0.7rem;
-}
-
-select:focus,
-button:focus {
-    outline: none;
-}
-
-button {
-    background-color: rgba(0, 0, 0, 0.6);
-    color: #ffffff;
+    transition: all 0.3s ease;
 }
 
 button:hover {
-    background-color: #1a1a1a;
+    transform: translateY(-1px);
 }
 
-video {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    max-height: calc(100vh - 150px);
-    border-radius: 5px;
-    margin-top: 20px;
-}
-
-.video-container {
+.btn-primary {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
     position: relative;
     overflow: hidden;
-    width: 100%;
-    padding-top: 53%;
 }
 
-.video-container video {
+.btn-primary:hover {
+    box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+}
+
+.btn-primary::before {
+    content: '';
     position: absolute;
     top: 0;
-    left: 0;
+    left: -100%;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
 }
 
-.form-group {
-    margin-bottom: 10px;
+.btn-primary:hover::before {
+    left: 100%;
 }
 
-.notification {
+/* Recording animations */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+    }
+}
+
+.recording #recordBtn {
+    animation: pulse 2s infinite;
+}
+
+@keyframes recordingGlow {
+    0%, 100% { 
+        box-shadow: 0 0 20px rgba(239, 68, 68, 0.5); 
+    }
+    50% { 
+        box-shadow: 0 0 40px rgba(239, 68, 68, 0.8); 
+    }
+}
+
+.video-preview.recording {
+    border-color: #ef4444;
+    animation: recordingGlow 2s infinite;
+}
+
+/* Cards and containers */
+.card {
+    background: rgba(30, 41, 59, 0.6);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(55, 65, 81, 0.3);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    background: rgba(30, 41, 59, 0.8);
+    border-color: #8b5cf6;
+    transform: translateY(-2px);
+}
+
+/* Feature cards */
+.feature-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card::before {
+    content: '';
     position: absolute;
-    top: 10px;
-    right: 10px;
-    padding: 5px;
-    background-color: rgba(0, 0, 0, 0.6);
-    color: #ffffff;
-    border-radius: 3px;
-    box-shadow: 0 1px 2px rgba(255, 255, 255, 0.1);
-    font-size: 0.8rem;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+.feature-card:hover::before {
+    left: 100%;
+}
+
+/* Video preview */
+.video-preview {
+    background: linear-gradient(45deg, #1e293b, #0f172a);
+    border: 2px solid #374151;
+    transition: all 0.3s ease;
+}
+
+.video-preview:hover {
+    border-color: #8b5cf6;
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+}
+
+/* Timer */
+.timer {
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+}
+
+/* Loading states */
+.loading {
+    position: relative;
+    pointer-events: none;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #8b5cf6;
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Success/Error states */
+.success {
+    background: linear-gradient(135deg, #10b981, #059669) !important;
+}
+
+.error {
+    background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+}
+
+/* Recording Card Preview */
+.recording-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.preview-container {
+    z-index: 10;
+    transition: opacity 0.3s ease;
+}
+
+.preview-video {
+    box-shadow: 0 20px 50px rgba(139, 92, 246, 0.4);
+    border: 2px solid rgba(139, 92, 246, 0.3);
+}
+
+.recording-card:hover .preview-container {
+    pointer-events: all;
+}
+
+.edit-name-btn {
+    transition: all 0.2s ease;
+}
+
+.edit-name-btn:hover {
+    transform: scale(1.1);
+}
+
+.recording-name input {
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-2px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .text-7xl {
+        font-size: 3rem !important;
+    }
+    
+    .text-5xl {
+        font-size: 2.5rem !important;
+    }
+    
+    .grid-cols-4 {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    
+    .lg\\:col-span-3 {
+        grid-column: span 1 !important;
+    }
+    
+    .px-10 {
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+    }
+    
+    .preview-video {
+        max-height: 150px;
+    }
 }
